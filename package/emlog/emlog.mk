@@ -15,11 +15,13 @@ EMLOG_IGNORE_CVES += CVE-2019-16868 CVE-2019-17073
 
 define EMLOG_BUILD_CMDS
 	$(MAKE) -C $(@D) $(TARGET_CONFIGURE_OPTS) nbcat
+	$(MAKE) -C $(@D) $(TARGET_CONFIGURE_OPTS) mkemlog
 endef
 
 # make install tries to strip, so install manually.
 define EMLOG_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/nbcat $(TARGET_DIR)/usr/bin/nbcat
+	$(INSTALL) -D -m 0755 $(@D)/mkemlog $(TARGET_DIR)/usr/bin/mkemlog
 endef
 
 $(eval $(kernel-module))
