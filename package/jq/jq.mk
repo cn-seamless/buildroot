@@ -15,7 +15,12 @@ JQ_INSTALL_STAGING = YES
 JQ_CONF_ENV += CFLAGS="$(TARGET_CFLAGS) -std=c99"
 HOST_JQ_CONF_ENV += CFLAGS="$(HOST_CFLAGS) -std=c99"
 
+ifeq ($(BR2_PACKAGE_HOST_ONIGURUMA),y)
+HOST_JQ_DEPENDENCIES += host-oniguruma
+HOST_JQ_CONF_OPTS += --with-oniguruma
+else
 HOST_JQ_CONF_OPTS += --without-oniguruma
+endif
 
 ifeq ($(BR2_PACKAGE_ONIGURUMA),y)
 JQ_DEPENDENCIES += oniguruma
